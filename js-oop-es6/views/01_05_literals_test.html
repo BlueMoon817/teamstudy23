@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연습문제</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">7. Template literals , tagged literals 연습문제와 해설</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>tagged literal 해체분석기를 이용해서 단어순서를 바꾸려면 어떻게해야할까요? </p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>(해체분석기`바지${pants} 양말${socks}`; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이렇게 코드를 실행하면 콘솔창에 `양말20 바지100`이라는 문장이 떠야합니다.)</p>
+          <div class="code_box">
+              var pants = 20;<br>
+              var socks = 100;<br>
+              function 해체분석기(문자들, 변수들1, 변수들2){<br>
+              &nbsp;&nbsp;console.log(문자들[1]+변수들1+문자들[0]+변수들2);<br>
+              }<br>
+              해체분석기`바지${pants} 양말${socks}`;<br>
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>바지가 0개면 '바지다팔렸어요'라는 문자를 대신 표시해주기</p>
+          <div class="code_box">
+              var pants = 0;<br>
+              var socks = 100;<br>
+              function 해체분석기(문자들, 변수들1, 변수들2){<br>
+              &nbsp;&nbsp;if(변수들1===0){<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;console.log(`바지다팔렸어요 양말`+변수들2);<br>
+              &nbsp;&nbsp;}<br>
+              }<br>
+              해체분석기`바지${pants} 양말${socks}`;<br>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

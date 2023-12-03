@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자바스크립트 함수 업그레이드하기</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">1.자바스크립트 함수 업그레이드하기(default parameter/arguments)</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <div class="code_box">
+            function 더하기(a,b){<br>
+	          &nbsp;&nbsp;console.log(a + b);<br>
+            }<br>
+            더하기(1,2);
+          </div>
+          <p class="text_desc"><span class="ic_bullet type01"></span>인자가 파라메터 개수보다 적어도 오류나지 않음.</p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>인자로 받지 못한 파라메터는 기본값 undefined임</p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>파라메터가 기본값이 필요하다면 셋팅할 수 있음</p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>파라메터도 변수이기 때문에 값으로 평가될 수 있는 모든 표현식을 기본 값으로 할당 가능하다.</p>
+          <div class="code_box">
+            function 더하기(a, b=2*a){<br>
+            &nbsp;&nbsp;// b의 인자가 없으면 10이 할당됨.<br>
+	          &nbsp;&nbsp;console.log(a + b); // 3<br>
+            }<br>
+            더하기(1);
+          </div>
+          <p class="text_desc"><span class="ic_bullet type01"></span>파라메터 개수보다 인자 개수가 많을 경우 나열된 순서로 남는 인자는 무시된다.</p>
+        </li>
+        <li class="list_items">
+          
+          <p class="text_desc"><span class="ic_bullet type01"></span>arguments: 모든 파라미터를 배열안에 넣은 변수</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>파라메터를 한번에 묶어서 배열사용하듯이 다루고 싶을 때 arguments 키워드를 사용할 수 있다.</p>
+          <div class="code_box">
+            function 더하기(a, b, c){  <br>
+	          &nbsp;&nbsp;console.log(arguments); // [1,2,3]<br>
+	          &nbsp;&nbsp;console.log(arguments[0]); // 1<br>
+	          &nbsp;&nbsp;console.log(arguments[1]); // 2<br>
+	          &nbsp;&nbsp;console.log(arguments[2]); // 3<br>
+            }<br>
+            더하기(1,2,3);
+          </div>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>파라메터를 반복문으로 다루고 싶다면 (옛날문법)</p>
+          <div class="code_box">
+            function 더하기(a,b,c){ <br>
+	          &nbsp;&nbsp;for&#40;let i=0; i< arguments.length; i+=1&#41;&#123;<br>
+		        &nbsp;&nbsp;&nbsp;&nbsp;console.log(arguments[i]); //1,2,3<br>
+	          &nbsp;&nbsp;}<br>
+            &nbsp;&#125;<br>
+            더하기(1,2,3);
+          </div>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>arguments의 단점 : 일부 파라메터만을 다루고 싶을 때 arguments 배열을 가공해서 작업해야함.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>템플릿 리터럴</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">3. 템플릿 리터럴</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>백틱으로 문자열을 감싸면 문장 줄바꿈도 적용이 된다.</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>문자열과 변수를 따로 + 연산자로 더하지 않고 같이 사용가능하다. 변수는 보간법( ${} )으로 감싸줌.</p>
+          <div class="code_box">
+          var 백틱 = `안녕하세요 저는 ${ name }입니다.`; <br>
+          console.log(백틱); // 안녕하세요 저는 문유라입니다.</div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>ES6-tagged literal</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>함수를 호출할 때 그룹연산자 대신 문자를 붙여 실행시킬 수 있다.</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>정규표현식으로 가능했던, 문자와 변수를 분리하여 사용가능하다.</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>해체분석기 파라미터1 : 문자들을 Array에 담아줌</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>해채분석기 파라미터2 : ${변수}를 뜻함</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>해채분석기 파라미터3 : ${변수}를 뜻함</p>
+          <div class="code_box">
+            function func(){ return 10; }<br>
+            //func를 호출할 때 소괄호 없이 템플릿리터럴을 붙여서 호출<br>
+            func`안녕하세요 저는 ${ name }입니다.`<br><br>
+            function 해체분석기(문자들, 변수들){<br>
+               &nbsp;&nbsp;console.log(문자들);  // ["안녕하세요", "입니다."]<br>
+               &nbsp;&nbsp;console.log(변수들);  // 문유라<br>
+             }<br><br>
+             //호출<br>
+            해체분석기`안녕하세요 저는 ${ name }입니다.`  => 함수실행<br>
+            <br>
+            function 해체분석기(문자들, 변수들1, 변수들2){<br>
+               &nbsp;&nbsp;console.log(문자들);  // ["안녕하세요", "입니다."]<br>
+               &nbsp;&nbsp;console.log(변수들1);  // 문유라<br>
+               &nbsp;&nbsp;console.log(변수들2);  // 문유라<br>
+             }<br>
+            //함수실행<br>
+            해체분석기`안녕하세요 저는 ${ name }입니다. address: ${address}`<br>
+            <br>
+            // 글자의 순서를 변경하고 싶을 때<br>
+            function 해체분석기(문자들, 변수들){<br>
+               &nbsp;&nbsp;console.log(문자들[1] + name + 문자들[0]);  // [ "입니다.",'문유라', "안녕하세요"]<br>
+             }
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>
