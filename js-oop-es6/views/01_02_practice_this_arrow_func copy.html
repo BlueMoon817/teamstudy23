@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연습문제</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">1. This, Arrow Function 연습문제</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제1 : 간단한 메소드 만들기</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>주어진 객체에 메소드를 추가하여 "안녕 나는 손흥민"을 출력하기</p>
+          <div class="code_box">
+            var 사람 = {<br>
+            &nbsp;&nbsp;name: '손흥민'<br>
+            }<br>
+            사람.sayHi(); // 안녕 나는 손흥민<br>
+          </div>
+          <div class="code_box">
+            var 사람 = {<br>
+            &nbsp;&nbsp;name: '손흥민',<br>
+            &nbsp;&nbsp;sayHi: function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log(`안녕 나는 ${this.name}`);<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            사람.sayHi(); // 안녕 나는 손흥민<br>
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제2 : 오브젝트 내의 데이터를 전부 더해주는 메소드 만들기</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>주어진 오브젝트에 전부더하기() 라는 함수를 만들기</p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span>중괄호 내에 코드작성 금지.</p>
+          <div class="code_box">
+            var 자료 = {<br>
+            &nbsp;&nbsp;data: [1,2,3,4,5]<br>
+            }<br>
+            자료.전부더하기();<br>
+          </div>
+          <div class="code_box">
+          var 자료 = {<br>
+          data: [1,2,3,4,5],<br>
+          }<br>
+          let addVal=0;<br>
+          자료.전부더하기=function(){<br>
+          &nbsp;&nbsp;this.data.forEach((item,index)=>{<br>
+          &nbsp;&nbsp;addVal+=addVal+item;<br>
+          });<br>
+          &nbsp;&nbsp;console.log(addVal);<br>
+          }<br>
+          자료.전부더하기(); //15
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제3 : setTimeout 사용하기</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>버튼을 클릭시, 1초후에 '버튼이에요' 콘솔에 출력시키기</p>
+          <div class="code_box"><br>
+            &lt;button id="버튼"&gt;버튼이에요&lt;/button&gt;<br>
+            document.getElementID('버튼').addEventListener('click', function(){<br>
+            &nbsp;&nbsp;console.log(this.innerHTML);<br>
+            });
+          </div>
+          <div class="code_box">
+            &lt;button id="버튼"&gt;버튼이에요&lt;/button&gt;<br>
+            document.getElementID('버튼').addEventListener('click', function(){<br>
+            &nbsp;&nbsp;setTimeout(()=>{<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;console.log(this.innerHTML);<br>
+            &nbsp;&nbsp;}, 1000)<br>
+            });
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

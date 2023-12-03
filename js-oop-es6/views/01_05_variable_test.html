@@ -15,54 +15,111 @@
     <div class="note_box">
       <ul class="note_list">
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제1~4 : 다음 코드의 콘솔창 출력결과</p>
+          <div class="code_box">
+            함수();<br>
+            function 함수(){<br>
+            &nbsp;&nbsp;console.log(안녕);<br>
+            &nbsp;&nbsp;let 안녕 = "Hello!";<br>
+            }<br>
+            // 안녕의 참조에러 : 접근이 선언보다 먼저일 수 없음. 
+          </div>
+          <div class="code_box">
+            함수();<br>
+            var 함수 = function(){<br>
+            &nbsp;&nbsp;console.log(안녕);<br>
+            &nbsp;&nbsp;var 안녕 = "Hello!";<br>
+            }<br>
+            // 타입에러 => 함수표현식을 사용한 함수는 변수선언만 호이스팅 되기 때문에 초기값이 undefined이므로<br>
+            //           function이 아닌 undefined타입으로 호출을 했기 때문에 타입에러가 뜬다.
+          </div>
+          <div class="code_box">
+            let a = 1;<br>
+            var 함수 = function(){<br>
+            &nbsp;&nbsp;a=2;<br>
+            }<br>
+            console.log(a);<br> 
+            // 1 => 함수를 호출한적이 없기 때문에 2로 재할당 되지 않음.
+          </div>
+          <div class="code_box">
+            let a = 1; <br> 
+            var b = 2; <br> 
+            window.a = 3; <br> 
+            window.b = 4; <br> 
+            console.log(a+b); <br> 
+            // 5 => var로 선언한 b는 전역객체인 window.b와 동일하며 반복선언이 가능하기 때문에 값이 덮어 씌워졌지만,<br>
+            //      let으로 선언한 a와 window의 a는 범위가 다르다. a를 출력하면 좀더 작은 범위의 a가 호출된다.<br>
+            //      따라서 (let으로 선언한 a의 1) + (덮어씌워진 window.b 의 값인 4) = 5<br>
+          </div>
         </li>
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제5: 1초마다 1~5를 순차적으로 출력하는 setTimeout을 반복문안에 넣었을 때 계속 5가 나오는 이유를 설명하시오.</p>
+          <div class="code_box">
+            // 정상작동 1~5 출력<br>
+            setTimeout(function(){console.log(1);},1000);<br>
+            setTimeout(function(){console.log(2);},2000);<br>
+            setTimeout(function(){console.log(3);},3000);<br>
+            setTimeout(function(){console.log(4);},4000);<br>
+            setTimeout(function(){console.log(5);},5000);<br><br>
+            
+            // 5가 다섯번 나옴<br>
+            for(var i = 1; i< 6; i++ ){<br>
+              setTimeout(function(){console.log(i);}, i * 1000);<br>
+            }<br><br>
+            // for문은 setTimeout이 콜백함수를 실행할때까지 기다리지 않고, setTimeout 함수를 다섯번 실행할 뿐이다.<br>
+            // 따라서 1씩 더해진 i의 값은 setTimeout을 실행하면서 시간 1000에 곱해지는 i에만 전달이 된다.<br>
+            // var로 선언한 i는 for문 실행이 종료되어도 최종 재할당된 값인 5가 할당된채 전역변수로 남는다.<br>
+            // setTimeout이 정해진 시간을 기다린 뒤 콜백함수를 실행하면서 i를 가져올 땐<br>
+            // 이미 for문은 종료되고 전역변수 i에 5가 할당된 상태이다.<br>
+            // 따라서 5가 1초 텀으로 다섯번 출력된다. <br>
+          </div>
         </li>
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제6: 버튼 클릭 => 모달창 띄우기</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>코드가 실행되지 않는 이유를 설명해보기</p>
+          <div class="code_box">
+            // 실행되는 코드<br>
+            &lt;div style="display : none"&gt;모달창0&lt;/div&gt;<br>
+            &lt;div style="display : none"&gt;모달창1&lt;/div&gt;<br>
+            &lt;div style="display : none"&gt;모달창2&lt;/div&gt;<br><br>
+                      
+            &lt;button&gt;버튼0&lt;/button&gt;<br>
+            &lt;button&gt;버튼1&lt;/button&gt;<br>
+            &lt;button&gt;버튼2&lt;/button&gt;<br><br>
+                      
+            var 버튼들 = document.querySelectorAll('button');<br>
+            var 모달창들 = document.querySelectorAll('div');<br><br>
+            
+            버튼들[0].addEventListener('click', function(){<br>
+              모달창들[0].style.display = 'block';<br>
+            });<br><br>
+            
+            버튼들[1].addEventListener('click', function(){<br>
+              모달창들[1].style.display = 'block';<br>
+            });<br><br>
+            
+            버튼들[2].addEventListener('click', function(){<br>
+              모달창들[2].style.display = 'block';<br>
+            });<br><br>
+            
+            // 실행되지 않는 코드<br>
+            var 버튼들 = document.querySelectorAll('button');<br>
+            var 모달창들 = document.querySelectorAll('div');<br><br>
+                      
+            for (var i = 0; i < 3; i++){<br>
+              버튼들[i].addEventListener('click', function(){<br>
+                모달창들[i].style.display = 'block';<br>
+              });<br>
+            }<br><br>
+            // 전역에 사용된 for문은 처음 window가 로드되는 타이밍에 실행되어버린다.<br>
+            // click 이벤트는 사용자에 의해 언제 발생할지 모르는 비동기적인 이벤트이다.<br>
+            // 위의 코드에서 window가 처음 로드 될 때 click이 발생하는지 세번 체크하고 for문은 종료되는데 이때<br>
+            // i라는 변수는 3이 할당된채 존재하게 된다. <br>
+            // 버튼의 인덱스는 0~2까지인데 클릭발생시 3이 할당된 i를 참조하고는 인덱스가 3인 버튼을 찾을 수 없다는 에러가 뜬다.<br>
+            // 해결: i를 let으로 선언하면 정상적인 인덱스 범위 (0~2)에서 버튼을 찾게 된다.
+          </div>
         </li>
       </ul>
-      <div class="code_box"></div>
     </div>
   </div>
 </body>
