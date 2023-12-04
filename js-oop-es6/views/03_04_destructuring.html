@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destructuring 문법</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">4. Destructuring 문법 </h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>배열 데이터를 전부 변수에 담으려면?</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            var arr = [2,3,4];<br>
+            var [a,b,c] = [2,3,4];<br>
+            //a=2,b=3,c=4  : 배열의 인자와 변수가 1:1 대응하여 생성 및 할당된다.<br>
+            var [a,b,c=10] = [2,3];<br>
+            // 선언할 변수에 기본값(파라메터)을 따로 줄 수 있다.<br>
+            // 배열의 요소 개수가 만들 변수 개수보다 부족하면 변수에 undefined가 할당된다.
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Object 데이터를 꺼내 변수에 담으려면?</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            var obj = {name:"Mun", age:30};<br>
+            var name= obj.name;<br>
+            var age = obj.age;<br>
+            // 객체의 키와 동일한 변수명을 가진 변수에 동일한 값을 변수 생성하면서 할당하고 싶을 경우<br>
+            var{name, age} = {name: "Mun", age:30};<br>
+            // 기본 파라메터 지정 가능<br>
+            var{name, age=24} = {name: "Mun"};<br>
+            var{name:이름, age=24} = {name: "Mun"};<br>
+            // 변수명이 name이 아닌 이름 이라는 변수로 만들고 싶다면 위와 같이 ': 변수명' 을 명시해준다.
+            var{name:이름='park', age=24} = {name: "Mun"};<br>
+            // 다른 변수명에 기본 값을 지정하고 싶을 경우 위와 같이 작성한다.<br>
+            var name="Mun";<br>
+            var age = 30;<br>
+            var obj = {name :name, age:age};<br>
+            // 키와 변수 들어온 값이 같은이름이면 축약가능하다.<br>
+            var obj = {name, age};<br>
+
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>함수 파라미터 만들떄도 destructuring 문법 사용가능</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            var obj = {name:"Mun", age:30};
+            function 함수(파라미터){
+              console.log(파라미터);
+            }
+            함수(obj);
+            
+            function 함수({name , age}){
+              console.log(name); //Mun
+              console.log(age); // 30
+            }
+            함수({name:"Mun", age:30});
+
+            function 함수([name , age]){
+              console.log(name);// 1
+              console.log(age); // 2
+            }
+            함수([1,2]);
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box"></div>
+        </li>
+        
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>
