@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proimse</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">1. Promise </h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Promise</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>성공/실패를 판정함</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>성공하면 <resolved></p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>판정대기중이면 <pending></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span>실패하면 &gt;rejected></p>
+          <div class="code_box">
+            // 파라메터가 꼭 2개 있어야 함 성공/실패
+            var 프로미스 = new Promise(성공, 실패);
+            프로미스.then(function(){
+              // 프로미스가 성공했을 경우 실행할 코드
+              성공();
+              // 실패 됐을 떄 실행할 코드
+              실패();
+            }).then(function(){
+              // 첫번쨰 성공으로 실행한 코드가 성공했을 떄 실행할 코드
+            })
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            프로미스.then(function(){
+              //성공했을 때 실행할 코드
+            }).catch(function(){
+              //실패했을 때 에러를 알려줄 코드
+            });
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            프로미스.finally(function(){
+              // 프로미스가 성공, 실패 상관 없이 실행이 끝나면 실행할 코드
+            });
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            var 프로미스 = new Promise(function(성공, 실패){
+              var 어려운연산 = 1+1;
+              // 파라메터를 넣을 수 있다. -> then 함수의 파라메터 인자로 전해짐 
+              성공(10);
+            });
+            프로미스.then(function(결과){
+              console.log(결과); // 10
+            }).catch(function(){
+              console.log('실패했어요');
+            });
+            프로미스.then(function(어려운연산){
+              console.log(결과); // 2
+            })
+          </div>
+        </li>
+        
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            // 1초 후에 성공 판정시 코드 실행
+            var 프로미스 = new Promise(function(성공, 실패){
+              setTimeout(function(){
+                성공();
+              }, 1000);
+            });
+
+            프로미스.then(function(결과){
+              console.log('성공했어요'); // 1초후 : 성공했어요 출력
+            }).catch(function(){
+              console.log('실패했어요');
+            });
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>프로미스를 사용하는 이유</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>프로미스는 비동기와 상관 없다.</p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span>즉, 비동기를 동기로 바꿔주는 문법이 아니다.</p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span>그냥 코딩 스타일이다..!</p>
+          <div class="code_box"></div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Promise가 적용된 곳들</p>
+          <div class="code_box">
+            // 프로미스를 리턴한다.
+            fetch();
+            jQuery.ajax();
+
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>async await</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>async 를 function 앞에 붙이면 함수 실행 후에 Promise 오브젝트가 반환된다.</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>단점은 성공의 경우에만 값을 보내줄 수 있다.</p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span>프로미스의 결과는 변수에 저장가능하다. (값이기 떄문)</p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            async function 더하기(){
+              return 1+1;
+            }
+
+            더하기().then(function(){
+              console.log('성공이에요'); //'성공이에요'
+            });
+
+            더하기().then(function(결과){
+              console.log(결과); //2
+            });
+
+
+
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>await</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>"async 함수 안"에서 쓰는 await는 then대신 사용가능하다.</p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span>await은 프로미스 실패시 에러나고 멈춥니다.</p>
+          <div class="code_box">
+            async function 더하기(){
+              var 프로미스 = new Promise(function(성공, 실패){
+                var 힘든연산 = 1+1;
+                성공(100);
+                실패(); // 에러남
+              });
+
+              try{
+                // 여기에 작성한 실행문을 실행해보고
+                var 결과 = await 프로미스; 
+              }catch{
+                // 에러시 알릴 실행문
+                console.log('실패!!!');
+              }
+              //프로미스.then(function(){
+                console.log('성공했어요');
+              });
+
+              var 결과 = await 프로미스; -> 프로미스 처리를 기다림.
+              console.log(결과);
+            }
+            
+            더하기(); // 100
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>버튼을 클릭하면 성공을 판정하는 Promise</p>
+          <p class="sub_desc"><span class="ic_bullet type02"></span>순차적으로 많을걸 실행할 때 유용</p>
+          <p class="sub_desc"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            async function 더하기(){
+              var 프로미스 = new Promise(function(){
+                document.getElementById('button').addEventListener('click', function(){
+                  성공('성공했어요');
+                });
+              });
+              var 결과 = await 프로미스;
+              console.log(결과);
+            }
+
+            더하기();
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>
