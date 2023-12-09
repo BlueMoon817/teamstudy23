@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES6 - class</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">7. Class (ES6)</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>상속기능을 구현하는 ES6 - class</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>constructor 만드는 신문법</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>자식.__proto__ == 부모.prototype</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Object.getPrototypeOf(자식);</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>자식객체의 prototype 출력</p>
+          <div class="code_box">
+            class 부모{<br>
+            &nbsp;&nbsp;constructor(파라미터){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.name = 파라미터;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 생성될 객체가 직접 가지는 함수<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.sayHi = function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('Hi');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;// constructor 밖에 선언한 함수는 새로 생성될 객체가 물려받지 않는다.<br>
+            &nbsp;&nbsp;// 부모의 prototype에만 추가된다.<br>
+            &nbsp;&nbsp;sayHello(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('Hello');<br>
+            &nbsp;&nbsp;}<br>
+            }<br><br>
+            
+            var 자식 = new 부모();<br><br>
+            
+            // 부모클래스의 프로토타입을 동적으로 추가하기<br>
+            부모.prototype.sayBye = function(){ console.log('bye~') }
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>객체지향 문법을 사용하는 이유 : Object를 여러개 만들어 사용하기 위함.</p>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>class를 복사하는 extends / super</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>유사한 class를 생성하고 싶을 때 사용.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span> extends를 사용하여 존재하는 클래스를 확장하여 새 클래스를 만들었을 경우<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor의 첫줄에 super()를 써주어야 한다.</p>
+          <div class="code_box">
+            class 할아버지{<br>
+             &nbsp;&nbsp;constructor(name1,name2){<br>
+             &nbsp;&nbsp;&nbsp;&nbsp;this.성 = 'Kim';<br>
+             &nbsp;&nbsp;&nbsp;&nbsp;this.이름1 = name1;<br>
+             &nbsp;&nbsp;&nbsp;&nbsp;this.이름2 = name2;<br>
+             &nbsp;&nbsp;}<br>
+             &nbsp;&nbsp;sayHi(){<br>
+             &nbsp;&nbsp;&nbsp;&nbsp;console.log('안녕');<br>
+             &nbsp;&nbsp;}<br>
+            }<br><br>
+            
+            var 할아버지1 = new 할아버지('만덕');<br><br>
+            
+            class 아버지 extends 할아버지{<br>
+            &nbsp;&nbsp;constructor(name1,name2,age){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;super(name1,name2);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.나이=age;<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;sayHi(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('아버지');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 할아버지의 sayHi함수도 실행시키기
+            &nbsp;&nbsp;&nbsp;&nbsp;super.sayHi();
+            &nbsp;&nbsp;}<br>              
+            }<br><br>
+            var 아버지1 = new 아버지('만수','만두',30);<br>
+            console.log(아버지1); // {성:"Kim", 이름1:"만수", 이름2:"만두", 나이:30}<br>
+            아버지1.sayHi(); // 아버지, 안녕<br>
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제</p>
+          <div class="code_box">
+            class 할아버지{<br>
+            &nbsp;&nbsp;constructor(name){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.성 = 'Kim';<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.이름 = name<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;sayHi(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('안녕 나는 할아버지')<br>
+            &nbsp;&nbsp;}<br>
+            }<br><br>
+            
+            class 아버지 extends 할아버지{<br>
+            &nbsp;&nbsp;constructor(name){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;super(name);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.나이 = 50;<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;sayHi2(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('안녕 나는 아버지');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;super.sayHi();<br>
+            &nbsp;&nbsp;}<br>
+            }<br><br>
+            
+            var a = new 아버지('만수');
+          </div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>위의 코드에서 a.sayHi2()를 실행하면 콘솔창에 출력되는 것은?</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>안녕 나는 아버지 , 안녕 나는 할아버지</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

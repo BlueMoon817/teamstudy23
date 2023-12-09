@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>스프레드 연산자</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/note.css">
 </head>
@@ -15,41 +16,47 @@
     <div class="note_box">
       <ul class="note_list">
         <li class="list_items">
-          <div class="code_box">
-                                //배열의 모든 요소를 함수의 인자로 넣고 싶은 경우<br>
-                                function 더하기(a,b,c){<br>
-                                &nbsp;&nbsp;console.log(a+b+c);<br>
-                                }<br>
-                                var 어레이 = [10,20,30];<br>
-                              </div>
           <p class="text_desc"><span class="ic_bullet type01"></span>함수에 배열 인자 넣는 방법 </p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span>1. 더하기(어레이[0],어레이[1],어레이[2]); // ..무지성방식,,,</p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span>2. 더하기.apply(undefined, 어레이); // 옛날방식</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>undefined에 적용해주세요 -> 그냥 더하기 함수를 실행하라는 의미.</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>-> 편법으로 편하게 인자로 넣기 위한 방법이었음.</p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span>3. 더하기(...어레이); // 요즘 방법</p>
+          <div class="code_box">
+          //배열의 모든 요소를 함수의 인자로 넣고 싶은 경우<br>
+          function 더하기(a,b,c){<br>
+          &nbsp;&nbsp;console.log(a+b+c);<br>
+          }<br>
+          var 어레이 = [10,20,30];<br>
+          </div>          
+          <p class="sub_desc type02">&nbsp;&nbsp;1. 더하기(어레이[0],어레이[1],어레이[2]); // ..무지성방식,,,</p>
+          <p class="sub_desc type02">&nbsp;&nbsp;2. 더하기.apply(undefined, 어레이); // 옛날방식</p>
+          <p class="sub_desc type03">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;undefined에 적용해주세요 -> 그냥 더하기 함수를 실행하라는 의미.</p>
+          <p class="sub_desc type03">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;편법으로 편하게 인자로 넣기 위한 방법이었음.</p>
+          <p class="sub_desc type02">&nbsp;&nbsp;3. 더하기(...어레이); // 요즘 방법</p>
+
         </li>
         <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>person2에 정의되지 않은 person 객체의 인사 메소드를 사용하고 싶을 경우</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>apply() , call() 사용</p>
           <div class="code_box">
-            apply() , call()<br><br>
             var person={<br>
             &nbsp;&nbsp;인사 : function(){<br>
             &nbsp;&nbsp;&nbsp;&nbsp;console.log(this.name + '안녕');<br>
             &nbsp;&nbsp;}<br>
-            }<br><br>
+            }<br>
             person.인사();  //undefined안녕<br><br>
             var person2 = {<br>
             &nbsp;&nbsp;name: "yura"<br>
-            }
-          </div>
-          <p class="text_desc"><span class="ic_bullet type01"></span>person2에 정의되지 않은 person 객체의 인사 메소드를 사용하고 싶을 경우</p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span>person.인사.apply(person2) => 인사메소드를 person2에 적용  </p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>console.log(person.인사.apply(person2)) // yura안녕<br>인사라는 메소드를 person2로 옯겨와서 실행한 의미가 됨.</p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span>파라메터가 있는 경우</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>console.log(person.인사.apply(person2, 인사함수에 주고 싶은 인자))<br>
+            }<br>
+            // person의 인사 메소드를 person2에 적용<br>
+            console.log(person.인사.apply(person2)); //yura안녕
+          </div>            
+        </li>
+        <li class="list_items">
+           <p class="text_desc"><span class="ic_bullet type01"></span>파라메터가 있는 경우</p>
+           <p class="sub_desc type02"><span class="ic_bullet type02"></span>person.인사.apply(person2, 인사함수에 주고 싶은 인자)</p>
+           <div class="code_box">
             console.log(person.인사.apply(person2, 1, 2))<br>
-            console.log(person.인사.apply(person2, [1, 2])) //apply는 배열로 인자를 넣을 수 있음(call과의 유일한 차이/ 기능은 같음)<br>
-            console.log(person.인사.call(person2, 1, 2));</p>
+            console.log(person.인사.apply(person2, [1, 2])) <br>
+            //apply는 배열로 인자를 넣을 수 있음(call과의 유일한 차이/ 기능은 같음)<br>
+            console.log(person.인사.call(person2, 1, 2));
+           </div>
         </li>
       </ul>
     </div>

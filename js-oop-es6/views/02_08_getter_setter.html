@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>getter setter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">8. getter, setter</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>getter, setter 사용이유</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>함수를 만들어 object 데이터를 다루는 이유</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>데이터를 동적으로 수정해주는 처리가 필요할 때</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>데이터변경시 예외처리에 용이</p>
+          <div class="code_box">
+            var 사람 = {<br>
+            &nbsp;&nbsp;name : 'Park',<br>
+            &nbsp;&nbsp;age:30,<br>
+            &nbsp;&nbsp;nextAge(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 내년의 age<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;return this.age+1<br>
+            &nbsp;&nbsp;},<br>
+            &nbsp;&nbsp;setAge(나이){  <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 데이터를 수정해주는 함수<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 나이를 변경하는 함수<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 데이터타입이 잘못들어왔을 때 parseInt로 숫자타입으로 변경해줄 수 있다.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.age = parseInt(나이); <br>
+            &nbsp;&nbsp;}<br>
+            }<br><br>
+            
+            사람.nextAge(); // 31<br>
+            사람.setAge(20);<br>
+            사람.age;// 20
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>ES5 부터 추가된 문법</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>set, get 키워드를 사용하여 함수를 만들면 호출시 소괄호를 생략할 수 있다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>set은 데이터를 변경하는 함수에 사용</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>setter 함수는 파라미터가 1개가 있어야 한다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>get은 데이터를 불러오는 함수에 사용</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>getter 함수는 return이 꼭 필요</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>getter 함수는 파라미터가 없어야 함</p>
+          <div class="code_box">
+            var 사람 = {<br>
+            &nbsp;&nbsp;name : 'Park',<br>
+            &nbsp;&nbsp;age:30,<br>
+            &nbsp;&nbsp;get nextAge(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;return this.age+1<br>
+            &nbsp;&nbsp;},<br>
+            &nbsp;&nbsp;set setAge(나이){  <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.age = parseInt(나이); <br>
+            &nbsp;&nbsp;}<br>
+            }<br><br>
+            // 호출<br>
+            사람.setAge=20;<br>
+            사람.nextAge;
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>class에서 사용하는 get/set</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>class에서 사용하는 get/set</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            class 사람 {<br>
+            &nbsp;&nbsp;constructor(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.name='Park';<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.age=20;<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;get nextAge(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;return this.age + 1 <br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;set setAge(나이){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.age = 나이<br>
+            &nbsp;&nbsp;}<br>
+            }<br><br>
+            
+            var 사람1 = new 사람();<br>
+            사람1.nextAge; // 21<br>
+            사람1.setAge=200<br>
+            console.log(사람1.age); // 201
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

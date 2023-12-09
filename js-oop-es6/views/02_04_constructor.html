@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constructor 의 용도</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">4. Constructor(생성자) 의 용도</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>비슷한 object를 쉽게 찍어낼 수 있는 constructor</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>키가 동일한 여러개의 데이터객체를 만들고 싶을 때 사용할 수 있다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>기본 유형을 만들어두고 값만 다르게 넣어서 복사하듯 생성한다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>생성자 함수에서의 this는 새로 생성되는 object = instance이다.</p>
+          <div class="code_box">
+            // 학생 객체처럼 name과 age를 가진 여러개의 객체를 생성하고 싶을 때,<br>
+            var 학생 = {name:"Kim", age:15}<br><br>
+            
+            function 생성자함수(){<br>
+            &nbsp;&nbsp;this.name="Kim";<br>
+            &nbsp;&nbsp;this.age = 15;<br>
+            }<br><br>
+    
+            var 학생1 = new 생성자함수();<br>
+            var 학생2 = new 생성자함수();<br>
+            console.log(학생1); // {name:"Kim", age:15}<br>
+            console.log(학생2); // {name:"Kim", age:15}
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>생성자 함수로 생성한 객체에 메서드 추가하기</p>
+          <div class="code_box">
+            // 생성자함수의 내장함수 추가<br>
+            function 생성자함수(){<br>
+            &nbsp;&nbsp;this.name="Kim";<br>
+            &nbsp;&nbsp;this.age = 15;<br>
+            &nbsp;&nbsp;this.sayHi=function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('안녕하세요' + this.name + '입니다');<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            학생1.sayHi(); // 안녕하세요 Kim입니다.<br>
+            학생2.sayHi(); // 안녕하세요 Kim입니다.
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>생성자함수로 생성한 객체의 속성값을 동적으로 넣기</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>키의 값을 파라미터를 설정하여 인자로 받을 수 있다.</p>
+          <div class="code_box">
+            // 생성자함수의 내장함수 추가<br>
+            function 생성자함수(name, age){<br>
+            &nbsp;&nbsp;this.name= name;<br>
+            &nbsp;&nbsp;this.age = age;<br>
+            &nbsp;&nbsp;this.sayHi=function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('안녕하세요' + this.name + '입니다');<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            학생1.sayHi('Park'); // 안녕하세요 Park입니다.<br>
+            학생2.sayHi('Mun'); // 안녕하세요 Mun입니다.            
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제1</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>쇼핑몰에 사용할 상품데이터를 constructor를 이용하여 만들기</p>
+          <div class="code_box">
+              function dataProducts(product, price){<br>
+              &nbsp;&nbsp;this.product=product;<br>
+              &nbsp;&nbsp;this.price=price;<br>
+              }<br>
+              let product1 = new dataProducts('shirt',50000);<br>
+              let product2 = new dataProducts('pants',60000);<br>
+              console.log(product1, product2);<br>
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제2</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>상품마다 부가세()라는 내부함수를 실행하면<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;콘솔창에 상품가격 * 10%만큼의 부가세금액이 출력되도록 constructor 함수를 수정하기</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>product1.부가세() 이렇게 쓰면 콘솔창에 상품의 부가세 값을 출력시키기</p>
+          <div class="code_box">
+              function dataProducts(product, price){<br>
+              &nbsp;&nbsp;this.product=product;<br>
+              &nbsp;&nbsp;this.price=price;<br>
+              &nbsp;&nbsp;this.부가세=function(){<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;console.log(this.price*0.1);<br>
+              &nbsp;&nbsp;}<br>
+              }<br><br>
+              
+              let product1 = new dataProducts('shirt',50000);<br>
+              product1.부가세(); // 5000
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

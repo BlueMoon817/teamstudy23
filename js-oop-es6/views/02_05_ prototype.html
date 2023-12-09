@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">5. Prototype</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>자바스크립트 언어에만 있는 Prototype</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>prototype은 상속을 구현해준다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>객체를 만들면 prototype이라는 공간이 생긴다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>생성자함수의 prototype에 값을 추가하면 생성자함수로 생성되는<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모든 객체들은 생성자함수의 prototype을 사용할 수 있다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>다만 prototype의 속성들은 생성자함수가 직접 가지고 있는 상태이다. </p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>파생된 객체는 해당 prototype을 가지고 있지 않지만, 사용할 수 있다.</p>
+          <div class="code_box">
+            function 학생데이터생성함수(name){<br>
+            &nbsp;&nbsp;this.name=name;<br>
+            &nbsp;&nbsp;this.age=15;<br>
+            &nbsp;&nbsp;this.sayHi=function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('안녕하세요'+ this.name + '입니다.');<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            // 학생데이터생성함수의 프로토타입으로(상속가능한 속성으로) gender라는 키와 '남'이라는 값을 추가. <br>
+            학생데이터생성함수.prototype.gender='남';<br><br>
+            
+            var 학생1 = new 학생데이터생성함수('park');<br>
+            var 학생2 = new 학생데이터생성함수('mun');<br><br>
+            
+            // 학생데이터생성함수의 프로토타입에 있으므로 상속받아 사용할 수 있다.<br><br>
+            
+            console.log(학생1.gender); // '남'<br>
+            console.log(학생2.gender); // '남'<br><br>
+             // 생성된 학생1 객체는 gender라는 속성을 갖고 있지 않다<br>
+            console.log(학생1); // {name:'park', age:15, sayHi:f}
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>프로토타입의 체이닝</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>어떤 프로토타입의 어트리뷰트를 객체가 가지고 있는지 검사하면,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;찾을 때까지 상위객체로 체이닝하면 프로토타입을 찾는다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>학생1 객체에 toString()를 사용할 수 있는 이유</p>
+          <div class="code_box">
+            function 학생데이터생성함수(name){<br>
+            &nbsp;&nbsp;this.name=name;<br>
+            &nbsp;&nbsp;this.age=15;<br>
+            &nbsp;&nbsp;this.sayHi=function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('안녕하세요'+ this.name + '입니다.');<br>
+            &nbsp;&nbsp;}<br>
+            }<br><br>
+            var 학생1 = new 학생데이터생성함수('park');<br>
+            console.log(학생1.toString()); // [object Object]<br><br>
+            // 학생데이터생성함수와 학생1에 toString이라는 메서드가 없지만<br>
+            // 학생1에 toString()을 사용할수 있는 이유는<br>
+            // 학생1의 prototype에 toString()이 없으면<br>
+            // 상위객체인 학생데이터생성함수의 prototype에서 toString() 를 찾고 거기에도 없으면<br>
+            // 그 위의 상위객체의 prototype에서 toString()을 찾는데<br>
+            // 여러 상위 객체들 중 String객체가 prototype으로 toString()을 가지고 있기 때문에 <br>
+            // 하위 객체인 학생1은 상속받아 toString()을 사용할 수 있는 것이다.
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Prototype의 동작원리 : 내장함수는 어떻게 동작하는가</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>변수에 할당되는 값들은 각 값이 속하는 데이터타입의 생성자함수로부터 '객체'로 생성된다.</p>
+          <div class="code_box">
+            // arr에 배열을 할당하면<br>
+            var arr = ['n','a','b'];<br>
+            // 자바스크립트에 내장되어있는 Array라는 생성자함수에서 객체를 생성한다.<br>
+            var arr = new Array('n','a','b');<br><br>
+            // 이 Array라는 생성자함수에 sort(), push() 등 <br>
+            // prototype으로 여러 함수를 갖고 있기 때문에<br>
+            // 생성된 arr은 직접 갖고 있지 않은 Array 생성자함수의 내장함수들을 상속받아 사용할 수 있다.<br>
+            console.log(arr.sort()); // ['a','b','n']
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>각 데이터타입 생성자함수의 prototype을 확인해보기</p>
+          <div class="code_box">
+            console.log(Array.prototype);<br>
+            console.log(String.prototype);<br>
+            console.log(Number.prototype);<br>
+            console.log(Boolean.prototype);<br>
+            console.log(Object.prototype);
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Prototype의 특징</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Prototype은 함수에만 생성된다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>내 상위 객체의 Prototype을 검사하고 싶다면 __proto__ </p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>객체명.__proto__ </p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>__proto__을 이용해 상위객체를 강제 등록할 수 있다.</p>
+          <div class="code_box">
+            var 부모 = {name:"Kim"}<br>
+            var 자식 = {};<br>
+            자식.__proto__ = 부모;<br>
+            console.log(자식.name); // Kim
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제</p>
+          <div class="code_box">
+            var 학생1 = { name : 'Kim', age : 20 }<br>
+            var 학생2 = { name : 'Park', age : 21 }<br>
+            var 학생3 = { name : 'Lee', age : 22 }
+          </div>          
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>1. constructor 문법을 사용해서 위의 오브젝트와 똑같은 오브젝트3개 생성하기</p>
+          <div class="code_box">
+              function 학생데이터함수(name,age){<br>
+              &nbsp;&nbsp;this.name=name;<br>
+              &nbsp;&nbsp;this.age=age;<br>
+              }<br>
+              var 학생1 = new 학생데이터함수('Kim', 20);<br>
+              var 학생2 = new 학생데이터함수('Park', 21);<br>
+              var 학생3 = new 학생데이터함수('Lee', 22);<br>
+              console.log(학생1);<br>
+              console.log(학생2);<br>
+              console.log(학생3);
+          </div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>2. 학생1.sayHi()라고 사용하면 "안녕 나는 Kim이야" 라는 글자가 콘솔창에 출력시키기 (constructor에 추가)</p>
+          <div class="code_box">
+            function 학생데이터함수(name,age){<br>
+            &nbsp;&nbsp;this.name=name;<br>
+            &nbsp;&nbsp;this.age=age;<br>
+            &nbsp;&nbsp;this.sayHi= function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('안녕 나는 ' + this.name + '이야');<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            var 학생1 = new 학생데이터함수('Kim', 20);<br>
+            학생1.sayHi();
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

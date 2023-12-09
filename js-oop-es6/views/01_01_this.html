@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>This의 의미</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">  
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/note.css">
 </head>
@@ -12,29 +13,15 @@
     <h1 class="note_title">1. This의 의미</h1>
     <div class="note_box">
       <ul class="note_list">
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span>자바스크립트엔진은 파싱할 때 window객체에 모든 내용을 담는다.</br>&nbsp;&nbsp;&nbsp;이 때 전체코드를 감싸는 암묵적으로 {}(오브젝트)가 생성된다.</p>
-        </li>
+        
         <li class="list_items">
           <p class="text_desc"><span class="ic_bullet type01"></span>window는 최상위 객체이다.</p>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span>전역에서 선언한 모든 요소들은 window 객체의 어트리뷰트가 된다.</p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span>함수는 전역에서 선언하면 window객체의 메서드가 된다.</p>
-        </li>
-        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>전역에서 선언한 함수나 변수는 window 객체의 어트리뷰트가 된다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>자바스크립트엔진은 파싱할 때 window객체에 모든 내용을 담는다.</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이 때 전체코드를 감싸는 {}(오브젝트)가 암묵적으로 생성된다.</p>          
           <p class="text_desc"><span class="ic_bullet type01"></span>this는 this가 표현된 식 또는 문을 감싸는 블록의 상위 객체를 가리킨다.</p>
-          <ul class="sub_list">
-            <li class="list_items">
-              <p class="sub_desc">
-                <span class="ic_bullet type02"></span>전역에서의 this는 상위객체인 window 객체를 가리킨다.
-              </p>
-            </li>
-            <li class="list_items">
-              <p class="sub_desc"><span class="ic_bullet type02"></span>window객체가 아닌 생성된 객체 내의 메서드에서의 this는,</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              this가 표현된 식 또는 문을 감싸는 블록의 바로 상위 객체를 가리킨다.</p>
-            </li>
-          </ul>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>전역에서의 this는 상위객체인 window 객체를 가리킨다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>window객체의 하위 객체 내의 메서드에서의 this는,</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              this가 표현된 식 또는 문을 감싸는 블록의 상위 객체를 가리킨다.</p>
           <div class="code_box">
             var 오브젝트 = {</br>
             &nbsp;&nbsp;data : 'Kim',</br>
@@ -43,48 +30,8 @@
             &nbsp;&nbsp;&nbsp;&nbsp;// 오브젝트를 가리킴.</br>
             &nbsp;&nbsp;&nbsp;&nbsp;console.log(this);</br>
             &nbsp;&nbsp;}</br>
-            }</br>
+            }</br></br>
             오브젝트.함수();</br>
-          </div>
-        </li>
-        <li class="list_items">
-          <p class="sub_desc"><span class="ic_bullet type02"></span>함수는 전역에서 선언하면 window객체의 메서드가 된다.</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>익명함수는 전역 선언으로 여겨지기 때문에 window를 가리킨다.</p>
-          <div class="code_box">
-            var arr = [1,2,3];</br>
-            arr.forEach(function(a){</br>
-            &nbsp;&nbsp;console.log(a); // 1,2,3</br>
-            &nbsp;&nbsp;console.log(this); // window객체</br>
-            &nbsp;&nbsp;// 콜백함수도 전역에서 사용된 일반함수이기 때문에</br>
-            &nbsp;&nbsp;// 이 함수 내에서의 this는 window를 가리킨다.</br>
-            });</br>
-            var 오브젝트 = {</br>
-            &nbsp;&nbsp;names: ['김', '이', '박'],</br>
-            &nbsp;&nbsp;func : function(){</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;console.log(this); // 오브젝트</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;// 콜백함수가 익명함수일경우</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;오브젝트.names.forEach( function(){</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(this); // window</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;})</br>
-            &nbsp;&nbsp;}</br>
-            }</br>
-          </div>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>콜백함수로 들어간 익명함수가 화살표함수일 경우 this가 표현된 문을 감싸는 상위의 this값을 </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그대로 상속받는다.</p>
-          <div class="code_box">
-            var 오브젝트 = {</br>
-            &nbsp;&nbsp;names: ['김', '이', '박'],</br>
-            &nbsp;&nbsp;func : function(){</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;console.log(this); // 오브젝트</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;// 콜백함수가 화살표함수일경우.</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;오브젝트.names.forEach( () => {</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(this);</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 오브젝트</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 오브젝트</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 오브젝트</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// >> 상위의 this값을 상속받기 때문</br>
-            &nbsp;&nbsp;&nbsp;&nbsp;})</br>
-            &nbsp;&nbsp;}</br>
-            }</br>
           </div>
         </li>
         <li class="list_items">
@@ -95,17 +42,57 @@
             생성자함수</br>
             function 기계 (){</br>
             &nbsp;&nbsp;this.이름 = "Kim"</br>
-            }</br>
+            }</br></br>
             
             var 오브젝트 = new 기계();</br>
             console.log(오브젝트.이름); // "Kim"
           </div>
+        </li>  
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>콜백함수로 쓰이는 익명함수도 전역에서 사용된 일반함수이기 때문에 window를 가리킨다.</p>
+          <div class="code_box">
+            var arr = [1,2,3];</br>
+            arr.forEach(function(a){</br>
+            &nbsp;&nbsp;console.log(a); // 1,2,3</br>
+            &nbsp;&nbsp;console.log(this); // window객체</br>
+            &nbsp;&nbsp;// 콜백함수도 전역에서 사용된 일반함수이기 때문에</br>
+            &nbsp;&nbsp;// 이 함수 내에서의 this는 window를 가리킨다.</br>
+            });</br></br>
+            var 오브젝트 = {</br>
+            &nbsp;&nbsp;names: ['김', '이', '박'],</br>
+            &nbsp;&nbsp;func : function(){</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log(this); // 오브젝트</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 콜백함수가 익명함수일경우</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;오브젝트.names.forEach( function(){</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(this); // window</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;})</br>
+            &nbsp;&nbsp;}</br>
+            }
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>콜백함수로 들어간 익명함수가 화살표함수일 경우 this가 표현된 문을 감싸는 상위의 this값을 </br> &nbsp;&nbsp;변경시키지 않고 외부값 그대로 상속받는다.</p>
+          <div class="code_box">
+            var 오브젝트 = {</br>
+            &nbsp;&nbsp;names: ['김', '이', '박'],</br>
+            &nbsp;&nbsp;func : function(){</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log(this); // 오브젝트</br></br>
+            &nbsp;&nbsp;&nbsp;&nbsp;오브젝트.names.forEach( () => {</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(this);</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 오브젝트</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 오브젝트</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 오브젝트</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 콜백함수가 화살표함수일경우 상위의 this값을 상속받기 때문</br>
+            &nbsp;&nbsp;&nbsp;&nbsp;})</br>
+            &nbsp;&nbsp;}</br>
+            }
+          </div>
         </li>
         <li class="list_items">
           <p class="text_desc"><span class="ic_bullet type01"></span>'use strict'</p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span>strict mode에서는 this가 다르게 작동한다.</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>전역에서의 this = window</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>함수 블록내에서 사용 = undefined</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>strict mode에서는 this가 다르게 작동한다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>전역에서의 this = window</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>함수 블록내에서 사용 = undefined</p>
         </li>
       </ul>
     </div>

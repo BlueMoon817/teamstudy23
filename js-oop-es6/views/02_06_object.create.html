@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES5방식으로 쉽게 구현하는 상속기능</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">6. ES5방식으로 쉽게 구현하는 상속기능</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Object.create(프로토타입object)</p>
+          <div class="code_box">
+            var 부모 = {name: 'Kim', age:50}<br>
+            // 프로토타입을 정의<br>
+            // 직접 가지고 있는 건 없지만, 부모의 속성을 사용할 수 있다.<br>
+            var 자식 = Object.create(부모);<br>
+            console.log(자식); {}<br>
+            console.log(자식.name); // Kim<br>
+            console.log(자식.age); // 50<br><br>
+            
+            // 자식의 속성값을 변경하기<br>
+            // 자식이 age속성을 동적으로 추가하면서 독립된 값을 할당한다.<br>
+            자식.age =20;<br>
+            console.log(자식.age); // 20<br>
+            console.log(부모.age); // 50<br><br>
+            // 손자에 자식을 상속하기<br>
+            var 손자 = Object.create(자식);<br>
+            // 부모에 name이 있으므로 자식을 거쳐서 부모의 값을 가져온다.  <br>  
+            console.log(손자.name); // Kim<br>
+            // 바로 위의 자식.age를 가져온다.<br>
+            console.log(손자.age); // 20
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

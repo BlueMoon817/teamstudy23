@@ -1,13 +1,16 @@
-body{background-color:#f6f8fa;}
+body{background-color:#f6f8fa;font-family: 'Noto Sans KR', sans-serif;}
 .wrap{width:100%;height:100%;}
 
 .note_title{text-align: center;padding:50px 0 30px;}
-.note_box{min-width:700px;width: 700px; height:calc(100vh - 180px);background-color: #deecd8;border-radius: 20px;box-sizing: border-box;overflow-y:auto;padding: 20px;margin: 0 auto;}
+.note_box{min-width:700px;width: 700px; height:calc(100vh - 180px);background-color: #deecd8;box-sizing: border-box;overflow-y:auto;padding: 20px;margin: 0 auto;}
+.note_list > .list_items:not(:nth-of-type(1)){margin-top:30px;}
 .list_items{word-break: keep-all;font-size:0;}
 .ic_bullet{display: inline-block;vertical-align: top;width: 5px;height: 5px;}
-.type01{background-color:#444;margin-right: 10px;border-radius: 50%;margin-top:11px;}
-.type02{border: 1px solid #555; margin:7px  8px 0 15px;box-sizing: border-box;border-radius: 50%;}
-.type03{background-color:#666;margin:7px 6px 0 30px;box-sizing: border-box;width: 4px;height: 4px;}
-.code_box{width: 100%;height: auto;margin:10px 0;padding: 10px 20px 10px 40px;box-sizing: border-box; background-color: #f6f6f6;border-radius: 20px;font-size: 12px;line-height:18px;}
-.list_items .text_desc{color: #111;font-size: 13px;line-height: 24px;padding-left: 3px;}
-.list_items .sub_desc{color: #555;font-size: 12px;line-height: 18px;}
+.ic_bullet.type01{background-color:#444;margin-right: 10px;border-radius: 50%;margin-top:10px;font-size:16px;font-weight:600;}
+.ic_bullet.type02{border: 1px solid #555; margin:7px  8px 0 15px;box-sizing: border-box;border-radius: 50%;font-size:15px;}
+.ic_bullet.type03{background-color:#666;margin:7px 6px 0 30px;box-sizing: border-box;width: 4px;height: 4px;font-size:14px;font-weight:400;}
+.code_box{width: 100%;height: auto;margin:10px 0;padding: 10px 20px 10px 40px;box-sizing: border-box; background-color: #2d2d2d;font-size: 12px;line-height:20px;color:#fff;}
+.list_items .text_desc{color: #111;font-size: 15px;line-height: 24px;padding-left: 3px;margin-top:8px;font-weight: 600;}
+.list_items .sub_desc{color: #222;font-weight:500;font-size: 13px;
+  line-height: 20px;}
+.list_items .sub_desc.type03{font-weight:400;}

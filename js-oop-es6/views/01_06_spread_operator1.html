@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>스프레드 연산자</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/note.css">
 </head>
@@ -16,11 +17,11 @@
       <ul class="note_list">
         <li class="list_items">
           <p class="text_desc"><span class="ic_bullet type01"></span>스프레드 연산자 활용</p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span>배열을 쉽게 합치거나 기존의 배열을 활용하여 새 배열을 만들고 싶을 때</p>
-          <p class="sub_desc"><span class="ic_bullet type02"></span> deep copy를 하고 싶을 때</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>스프레드 연산자를 이용하여 복사하면 다른 메모리에 같은 배열을 새로 복사하게 된다.</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>즉 스프레드 연산자를 이용하여 복사된 변수의 배열의 값을 변경하여도<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 복사해왔던 원본배열은 영향을 받지 않는다.</p>
-          <p class="sub_desc"><span class="ic_bullet type03"></span>변수에 배열을 복사할 때 등호를 이용한 복사는 같은 메모리 주소를 공유할 뿐이다. (동일한 배열을 참조)</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>배열을 쉽게 합치거나 기존의 배열을 활용하여 새 배열을 만들고 싶을 때</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span> deep copy를 하고 싶을 때</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>스프레드 연산자를 이용하여 복사하면 다른 메모리에 같은 배열을 새로 복사하게 된다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>즉 스프레드 연산자를 이용하여 복사된 변수의 배열의 값을 변경하여도<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 복사해왔던 원본배열은 영향을 받지 않는다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>변수에 배열을 복사할 때 등호를 이용한 복사는 같은 메모리 주소를 공유할 뿐이다. (동일한 배열을 참조)</p>
           <div class="code_box">
             var a = [1,2,3];<br>
             var b = [4,5];<br>
@@ -30,9 +31,9 @@
             var o1 ={a:1, b:2};<br>
             var o2 = {...o1, c:3}<br>
             console.log(o2); {a:1, b:2, c:3}<br>
-중괄호내의 값도 가져옴.<br>
+//중괄호내의 값도 가져옴.<br>
 
-유의사항<br>
+//유의사항<br>
 var o1 ={a:1, b:2};<br>
 var o2 = {a:2, ...o1}<br>
 console.log(o2); {a:1, b:2}  => 덮어 씌우기 됨.<br>
@@ -41,7 +42,7 @@ var o1 ={a:1, b:2};<br>
 var o2 = {...o1, a:2}<br>
 console.log(o2); { b:2, a:2}  => 덮어 씌우기 됨.
 </div>
-<p class="sub_desc"><span class="ic_bullet type02"></span>스프레드연산자는 중괄호, 소괄호, 대괄호에서만 사용할 수 있다.</p>
+<p class="sub_desc type02"><span class="ic_bullet type02"></span>스프레드연산자는 중괄호, 소괄호, 대괄호에서만 사용할 수 있다.</p>
 </li>
 </ul>
     </div>
