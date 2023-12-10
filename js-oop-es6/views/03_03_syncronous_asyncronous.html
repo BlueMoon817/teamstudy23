@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>웹 브라우저의 특수성 /동기와 비동기</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">3. 웹 브라우저의 특수성 / 동기와 비동기 </h1>
+    <div class="note_box">
+      <ul class="note_list">
+           
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>웹 브라우저의 특수성</p>
+          <div class="code_box">
+            console.log(1);<br>
+            setTimeout(()=>{ console.log(2)},1000);<br>
+            console.log(3);<br>
+            // 실행결과 1 3 2<br>
+            // setTimeout은 비동기함수이기 떄문에 코드 작성순서와 상관없이 실행 조건이 맞으면 실행된다.<br>
+            // element.addEventListener('click', function(){});<br>
+            // $.ajax();
+          </div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>자바스크립트엔진은 DOM API, Ajax, Timer 등의 함수를 먼저 실행하지 않고 Web APIs로 넘겨 대기시킨다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>timer 함수의 딜레이가 0초여도 실행우선순위에서 제외된다.</p>          
+        </li>
+        <li class="list_items" style="display:flex;">
+          <img src="../images/eventloop.jpg" alt="" style="width:270px;">
+          <div class="text_wrap" style="width:calc(100% - 280px);margin-left:20px">
+            <p class="text_desc"><span class="ic_bullet type01"></span>이벤트루프 작동원리 (웹브라우저 내부)</p>
+            <p class="sub_desc type02">1. 코드실행시 바로 실행할 수 있는 코드는 Call Stack에 쌓여 하나씩 순서대로 실행된다.(선입선출)</p>
+            <p class="sub_desc type02">2. DOM API, Ajax, Timer 등은 Web APIs로 넘겨져 대기한다.</p>
+            <p class="sub_desc type02">3. Web APIs에서 실행가능 상태가 된 요소는 Task Queue로 넘겨진다.</p>
+            <p class="sub_desc type02">4. Task Queue에서 대기하다가 Call Stack이 비워지면 Call Stack으로 넘겨져서 실행된다.</p>
+          </div>
+        </li>  
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>자바스크립트의 동기식 처리(Synchronous)</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>DOM API, Ajax, Timer등에 포함되지 않은 일반 실행문들은 오래걸리는 연산을 만나면<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;연산이 끝날 때까지 기다렸다가 다음 코드를 실행한다.</p>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>비동기식 처리 (Asynchronous)</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>DOM API, Ajax, Timer등의 Web API와 연관된 특수한 함수들은 코드 실행시 실행 시점이 뒤로 밀려난다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>특수한 함수들의 실행을 뒤로 미루고 다음 코드부터 실행하기 때문에 자바스크립트에서는 블로킹(실행공백)없이 작동된다.</p>
+          <div class="code_box">
+            console.log(1);<br>
+            setTimeout(function(){ console.log(2)},1000);<br>
+            document.addEventListener('click', 함수식별자);<br>
+            console.log(3);<br>
+            1->3->2 
+          </div>
+        </li>        
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>함수의 호출순서를 정하고 싶을 때 콜백함수의 형태로 작업한다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>콜백함수는 함수 디자인 패턴일 뿐 비동기, 동기와는 상관 없다.</p>
+          <div class="code_box"><br>
+            function 첫째함수(콜백함수){<br>
+            &nbsp;&nbsp;console.log('1');<br>
+            &nbsp;&nbsp;콜백함수(셋째함수);<br>
+            }<br><br>
+
+            function 둘째함수(콜백함수){<br>
+            &nbsp;&nbsp;setTimeout(function(){ console.log(2); 콜백함수();},1000);<br>
+            }<br>
+            function 셋째함수(){<br>
+            &nbsp;&nbsp;console.log('3');<br>
+            }<br>
+            첫째함수(둘째함수); // 1, 2, 3
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>콜백함수의 문제점(콜백지옥..)</p>
+          <div class="code_box">
+            첫째함수(function(){<br>
+            &nbsp;&nbsp;둘째함수(function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;셋째함수(function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//...<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;})<br>
+            &nbsp;&nbsp;})<br>
+            })
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>콜백함수를 promise 패턴으로 디자인 할수 있다.</p>
+          <div class="code_box">
+            첫째함수().then(function(){<br>
+            &nbsp;&nbsp;첫째함수 실행 후 실행할 함수<br>
+            }).then(function(){<br>
+            &nbsp;&nbsp;그다음 실행할 함수<br>
+            });
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

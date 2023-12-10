@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">2. Module</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>모듈 가져오기</p>
+           <p class="sub_desc type02"><span class="ic_bullet type02"></span>옛날문법</p>
+           <p class="sub_desc type03"><span class="ic_bullet type03"></span> var 가져오기 = require('경로');</p>
+           <p class="sub_desc type02"><span class="ic_bullet type02"></span>ES6 문법</p>
+          <div class="code_box">
+            	&lt;script type="module"&gt;<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;import 가져올거 from '경로'<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;import Element from '경로'<br>
+            	&lt;/script&gt;
+          </div>
+          <p class="text_desc"><span class="ic_bullet type01"></span>모듈 파일에서 요소 내보내기</p>
+          <div class="code_box">
+              export default Element;<br>
+              export default 는 파일당 한번만 사용가능.<br>
+              여러개 내보내고 싶으면 export로 선언해준다.<br>
+              1	&#41; export 내보낼거1<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;export 내보낼거2<br>
+              2	&#41; export {내보낼거1, 내보낼거2}<br>
+              3	&#41; export var a=10<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;export var b=10
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>import 할 때 식별자명 설정</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>export default 로 내보냈을 경우 가져올 것의 export된 이름을 변경해서 작명해도 된다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>import 작명 from "경로"</p>
+          <div class="code_box">import {a as numberValue} from "./js/Number.js";</div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>export 로만 내보냈을 경우 가져올 것의 export된 이름을 동일하게 써서 중괄호에 담아준다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>import {a} from "경로"</p>
+          <div class="code_box">import {a} from "./js/Number.js";</div>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>import {a, b} from "경로"</p>
+          <div class="code_box">import {a, b} from "./js/Number.js";</div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>export로 내보내기한 것을 가져올 때 이름을 바꾸고 싶을 경우</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>import {기존이름 as 작명} from "경로";</p>
+          <div class="code_box">import {a as numberValue} from "./js/Number.js";</div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>export 와 export default를 동시에 쓸수 있다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>export 와 export default를 동시에 사용하여 내보내기 한 것을 가져올 경우</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>export default로 내보낸 것을 먼저 써주어야 한다.(순서 중요!)</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>import 작명,{a,b} from '경로';</p>
+          <div class="code_box">import defaultName , {a,b} from "./js/Module.js";</div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>모든 걸 다 import 해오는 * 기호 (export로 내보낸것만 가능)</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>식별자를 작명하여 호출</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>import * as 작명 from "경로";</p>
+          <div class="code_box">import * as 별명 from "./js/Module.js";</div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>default로 내보낸 것도 같이 가져오려면?</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>import 작명,* as 식별자 from "경로";</p>
+          <div class="code_box">import 작명, * as All from "./js/Module.js";</div>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>요소선택 : 식별자.요소의 원래이름</p>
+          <div class="code_box">
+            All.a<br>
+            All.b
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

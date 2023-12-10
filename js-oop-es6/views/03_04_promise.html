@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proimse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">4. Promise </h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>promise 사용하는 이유</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>콜백함수가아닌 코드 디자인을 하고 싶을 때</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>성공, 실패의 경우에 맞춰 각각 다른코드 실행가능</p>          
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Promise의 3가지 상태</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>성공하면 &lt;resolved&gt;</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>판정대기중이면 &lt;pending&gt;</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>실패하면 &lt;rejected&gt;</p>
+          <div class="code_box">
+            // 파라미터가 꼭 2개 있어야 함 성공/실패<br>
+            var 프로미스 = new Promise(성공, 실패);<br><br>
+            프로미스.then(function(){<br>
+            &nbsp;&nbsp;// 프로미스가 성공했을 경우 실행할 코드<br>
+            &nbsp;&nbsp;성공();<br>
+            &nbsp;&nbsp;// 실패 됐을 때 실행할 코드<br>
+            &nbsp;&nbsp;실패();<br>
+            }).then(function(){<br>
+            &nbsp;&nbsp;// 첫번쨰 성공으로 실행한 코드가 성공했을 떄 실행할 코드<br>
+            })
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>catch, finally</p>
+          <div class="code_box">
+            var 프로미스 = new Promise(성공, 실패);<br><br>            
+            프로미스.then(function(){<br>
+            &nbsp;&nbsp;//성공했을 때 실행할 코드<br>
+            }).catch(function(){<br>
+            &nbsp;&nbsp;//실패했을 때 에러를 알려줄 코드<br>
+            }).finally(function(){<br>
+            &nbsp;&nbsp;// 프로미스가 성공, 실패 상관 없이 실행이 끝나면 실행할 코드<br>
+            });            
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Promise 예시1 : 파라미터</p>
+          <div class="code_box">
+            var 프로미스 = new Promise(function(성공, 실패){<br>
+            &nbsp;&nbsp;var 어려운연산 = 1+1;<br>
+            &nbsp;&nbsp;// 파라메터를 넣을 수 있다. -> then 함수의 파라메터 인자로 전해짐 <br>
+            &nbsp;&nbsp;성공(10);<br>
+            });<br><br>
+            프로미스.then(function(결과){<br>
+            &nbsp;&nbsp;console.log(결과); // 10<br>
+            }).catch(function(){<br>
+            &nbsp;&nbsp;console.log('실패했어요');<br>
+            });<br><br>
+            프로미스.then(function(어려운연산){<br>
+            &nbsp;&nbsp;console.log(결과); // 2<br>
+            })
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Promise 예시2</p>
+          <div class="code_box">
+            // 1초 후에 성공 판정시 코드 실행<br>
+            var 프로미스 = new Promise(function(성공, 실패){<br>
+            &nbsp;&nbsp;setTimeout(function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;성공();<br>
+            &nbsp;&nbsp;}, 1000);<br>
+            });<br><br>
+
+            프로미스.then(function(결과){<br>
+            &nbsp;&nbsp;console.log('성공했어요'); // 1초후 : 성공했어요 출력<br>
+            }).catch(function(){<br>
+            &nbsp;&nbsp;console.log('실패했어요');<br>
+            });<br>
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Promise가 적용된 곳들</p>
+          <div class="code_box">
+            // 프로미스를 리턴한다.<br>
+            fetch()<br>
+            jQuery.ajax();<br>
+            //리턴된 프로미스를 사용<br>
+            fetch().then().catch();<br>
+            jQuery.ajax().then().catch();
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제 : &lt;img&gt; 이미지 로딩 성공시 특정 코드를 실행하기 </p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>이미지가 로드가 되면 콘솔창에 성공, 로드가 실패하면 콘솔창에 실패를 출력</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Promise 문법의 then, catch 함수를 사용</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>이미지 로딩이 끝났다는 것은 <img>에 load라는 이벤트리스너를 붙여서 체크가 가능</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>이미지 로딩이 실패했다는 것은 <img>에 error라는 이벤트리스너를 붙여서 체크</p>
+          <div class="code_box">
+            <!-- <img id="test" src="https://codingapple1.github.io/kona.jpg">  -->
+            let check=new Promise(function(resolve, reject){<br>
+            &nbsp;&nbsp;let imgEl=document.querySelector('#test');<br>
+            &nbsp;&nbsp;imgEl.addEventListener('load', function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;resolve();<br>
+            &nbsp;&nbsp;});<br>
+            &nbsp;&nbsp;imgEl.addEventListener('error', function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;reject();<br>
+            &nbsp;&nbsp;});<br>
+            });<br><br>
+            check.then(function(){<br>
+            &nbsp;&nbsp;console.log('이미지 로드 성공');<br>
+            }).catch(function(){<br>
+            &nbsp;&nbsp;console.log('이미지 로드 실패');<br>
+            });
+          </div>
+        </li>        
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제 : Ajax 요청이 성공하면 코드를 실행</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>https://codingapple1.github.io/hello.txt 라는 경로로 GET 요청 하면 인삿말이 출력된다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>GET 요청이 성공하면 인삿말 출력시키기</p>
+
+          <div class="code_box">
+            $.ajax({<br>
+            &nbsp;&nbsp;method:'GET',<br>
+            &nbsp;&nbsp;url:'https://codingapple1.github.io/hello.txt'<br>
+            }).then(function(data){<br>
+            &nbsp;&nbsp;console.log(data);<br>
+            })         
+          </div>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>연습을 위한 예제로 프로미스 기능 중복..!</p>
+          <div class="code_box">
+            var 프로미스 = new Promise(function(성공, 실패){<br>
+            &nbsp;&nbsp;$.ajax({<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;method:'GET',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;url:'https://codingapple1.github.io/hello.txt'<br>
+            &nbsp;&nbsp;}).done(function(data){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;성공(data);<br>
+            &nbsp;&nbsp;});<br>
+            });<br><br>
+            프로미스.then(function(data){<br>
+            &nbsp;&nbsp;console.log(data);<br>
+            });
+          </div>
+        </li>        
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제: Promise chaining </p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>https://codingapple1.github.io/hello.txt 라는 경로로 GET 요청</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>.then을 이용해 인삿말을 콘솔창에 출력</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>그 직후 https://codingapple1.github.io/hello2.txt 라는 경로로 GET 요청을 또 하고</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>.then을 이용해 인삿말을 또 출력</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            var 프로미스 = new Promise(function(성공, 실패){<br>
+            &nbsp;&nbsp;$.ajax({<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;method:'GET',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;url:'https://codingapple1.github.io/hello.txt'<br>
+            &nbsp;&nbsp;}).done(function(data){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;성공(data);<br>
+            &nbsp;&nbsp;});<br>
+            });<br><br>
+            프로미스.then(function(data){<br>
+            &nbsp;&nbsp;console.log(data);<br>
+            &nbsp;&nbsp;var 프로미스2 = new Promise(function(성공, 실패){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;$.ajax({<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method:'GET',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url:'https://codingapple1.github.io/hello2.txt'<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}).done(function(data2){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성공(data2);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;});<br>                 
+            &nbsp;&nbsp;});<br>
+            &nbsp;&nbsp;return 프로미스2;<br>
+            }).then(function(data){<br>
+            &nbsp;&nbsp;console.log(data);<br>
+            })
+          </div>
+        </li>        
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> async await</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">5. async await</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>async (ES8)</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>async 를 function 앞에 붙이면 함수 실행 후에 Promise 오브젝트가 반환된다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>단점은 성공의 경우에만 값을 보내줄 수 있다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>실패는 직접 명시해야한다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>프로미스의 결과는 변수에 저장가능하다. (값이기 때문)</p>
+          <div class="code_box">
+            async function 더하기(){<br>
+            &nbsp;&nbsp;return 1+1;<br>
+            }<br><br>
+
+            더하기().then(function(){<br>
+            &nbsp;&nbsp;console.log('성공이에요'); //'성공이에요'<br>
+            });<br><br>
+
+            더하기().then(function(결과){<br>
+            &nbsp;&nbsp;console.log(결과); //2<br>
+            });
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>await (ES8)</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>"async 함수 안"에서 쓰는 await는 then대신 사용가능하다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>await은 프로미스 실패시 에러나고 멈춘다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>try{} catch{}로 에러가 나도 멈추는 것을 방지할 수 있다.</p>
+          <div class="code_box">
+            async function 더하기(){<br>
+            &nbsp;&nbsp;var 프로미스 = new Promise(function(성공, 실패){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;var 힘든연산 = 1+1;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;성공(100);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;실패(); // 에러남<br>
+            &nbsp;&nbsp;});<br><br>
+            &nbsp;&nbsp;try{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 여기에 작성한 실행문을 실행해보고<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;var 결과 = await 프로미스; <br>
+            &nbsp;&nbsp;}catch{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 에러시 알릴 실행문<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log('실패!!!');<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;//프로미스.then(function(){<br>
+            &nbsp;&nbsp;//console.log('성공했어요');<br>
+            &nbsp;&nbsp;//});<br><br>
+            &nbsp;&nbsp;var 결과 = await 프로미스; -> 프로미스 처리를 기다림.<br>
+            &nbsp;&nbsp;console.log(결과);//100<br>
+            }<br><br>
+            
+            더하기(); // 100
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>버튼을 클릭하면 성공을 판정하는 Promise</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>순차적으로 많을걸 실행할 때 유용</p>
+          <div class="code_box">
+            async function 더하기(){<br>
+            &nbsp;&nbsp;var 프로미스 = new Promise(function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;document.getElementById('button').addEventListener('click', function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성공('성공했어요');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+            &nbsp;&nbsp;});<br>
+            &nbsp;&nbsp;var 결과 = await 프로미스;<br>
+            &nbsp;&nbsp;console.log(결과);<br>
+            }<br><br>
+
+            더하기();
+          </div>
+        </li>        
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>
