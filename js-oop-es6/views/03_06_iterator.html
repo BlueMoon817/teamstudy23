@@ -16,32 +16,71 @@
     <div class="note_box">
       <ul class="note_list">
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>반복문</p>
           <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
           <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
+          <div class="code_box">
+            var 오브젝트 = {name:"Kim", age:30}
+            for(let i = 0; i < 3; i++){
+
+            }
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>for in 반복문</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Object에 있던 값을 전부 하나씩 꺼내서 사용할 때</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>enumerable한 것만 반복해준다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>enumerable 이라는 것은 object 생성시 </p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>Object.getOwnPropertyDescriptor(오브젝트, 'name'); 으로 데이터에 셋팅된 설정값을 확인할 수 있다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>enumerable 이라는 것은 오브젝트["name"]에서는 셀수 있는 값이기 떄문에 true(기본값)로 설정되어있다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>Object 자료형에만 사용</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
+          <div class="code_box">
+            var 오브젝트 = {name:"Kim", age:30}
+            for(let key in 오브젝트){
+              console.log(오브젝트[key]);
+            }            
+            for(let key in 오브젝트){
+              console.log(오브젝트["name"]);
+            }            
+          </div>
         </li>
         <li class="list_items">
           <p class="text_desc"><span class="ic_bullet type01"></span></p>
           <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
           <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
+          <div class="code_box">
+            class 부모 {
+
+            }
+            부모.prototype.name = "Park";
+            var 오브젝트 = new 부모();
+
+            for(var key in 오브젝트){
+              if(오브젝트.hasOwnProperty(key)){
+                console.log(오브젝트[key]);
+              }
+            }
+          </div>
         </li>
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>for of 반복문</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Array, 문자, arguments, NodeList, Map, Set에 사용 가능</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>이터러블한 요소에만 사용가능</p>
           <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
+          <div class="code_box">
+            var 어레이 = [2,3,4,5];
+            for(var 자료 of 어레이){
+              console.log(자료);
+            }
+            for(var 자료 of 'ㄴㄻㄴㅇㅁㄴㅇ'){
+              console.log(자료); //ㄴㄹㅁㄴㅇㅁㄴㅇ
+            }
+          </div>
         </li>
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>어레이[Symbol.iterator]();</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>StringIterator{} 라는 것을 가지고 있는 </p>
           <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
           <div class="code_box"></div>
         </li>
