@@ -17,98 +17,120 @@
       <ul class="note_list">
         <li class="list_items">
           <p class="text_desc"><span class="ic_bullet type01"></span>반복문</p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>for문</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>forEach() : Array 전용</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>반복문의 용도</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>코드를 여러번 실행</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>Array, Object에서 자료를 꺼내 사용할 때</p>
           <div class="code_box">
-            var 오브젝트 = {name:"Kim", age:30}
-            for(let i = 0; i < 3; i++){
-
+            var 오브젝트 = {name:"Kim", age:30} <br>
+            for(let i = 0; i < 3; i++){<br>
+            &nbsp;&nbsp;// 반복시킬 실행문<br>
             }
           </div>
         </li>
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span>for in 반복문</p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Object에 있던 값을 전부 하나씩 꺼내서 사용할 때</p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>for in 반복문 : Object 전용</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>Object 자료형에만 사용가능</p>
           <p class="sub_desc type02"><span class="ic_bullet type02"></span>enumerable한 것만 반복해준다.</p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span>enumerable 이라는 것은 object 생성시 </p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span>Object.getOwnPropertyDescriptor(오브젝트, 'name'); 으로 데이터에 셋팅된 설정값을 확인할 수 있다.</p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span>enumerable 이라는 것은 오브젝트["name"]에서는 셀수 있는 값이기 떄문에 true(기본값)로 설정되어있다.</p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span>Object 자료형에만 사용</p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>Object.getOwnPropertyDescriptor(오브젝트, 'name');실행으로 enumerable 어트리뷰트를 확인할 수 있다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>오브젝트["name"]는 셀수 있는 값이기 때문에 enumerable 값이 true로 설정되어있다.</p>
           <div class="code_box">
-            var 오브젝트 = {name:"Kim", age:30}
-            for(let key in 오브젝트){
-              console.log(오브젝트[key]);
-            }            
-            for(let key in 오브젝트){
-              console.log(오브젝트["name"]);
-            }            
+            var 오브젝트 = {name:"Kim", age:30}<br>
+            for(let key in 오브젝트){<br>
+            &nbsp;&nbsp;console.log(오브젝트[key]);<br>
+            }<br>
+            for(let key in 오브젝트){<br>
+            &nbsp;&nbsp;console.log(오브젝트["name"]);<br>
+            }
+            // 오브젝트가 특정한 키를 가지고 있는지 검사할 수 있다.<br>
+            class 부모 {<br>
+            &nbsp;&nbsp;//...<br>
+            }<br><br>
+
+            var 어레이 = [2,3,4,5];<br>
+            for(var 자료 of 어레이){<br>
+            &nbsp;&nbsp;console.log(자료); // 2,3,4,5<br>
+            }<br><br>
+            for(var 자료 of 'ㄴㄻㄴㅇㅁㄴㅇ'){<br>
+            &nbsp;&nbsp;console.log(자료); //ㄴㄹㅁㄴㅇㅁㄴㅇ<br>
+            }<br><br>
+
+            부모.prototype.name = "Park";<br>
+            var 오브젝트 = new 부모();<br><br>
+            
+            for(var key in 오브젝트){<br>
+            &nbsp;&nbsp;if(오브젝트.hasOwnProperty(key)){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log(오브젝트[key]);<br>
+            &nbsp;&nbsp;}<br>
+            }
+
           </div>
         </li>
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>for of 반복문 : iterable 전용</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Array, String, arguments, NodeList, Map, Set에 사용 가능</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>iterable한 자료형에만 사용가능</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>iterable한 자료형이란 [Symbol.iterator]() 이라는 일종의 메소드를 가지고 있는 자료형들을 뜻한다</p>
+
           <div class="code_box">
-            class 부모 {
-
-            }
-            부모.prototype.name = "Park";
-            var 오브젝트 = new 부모();
-
-            for(var key in 오브젝트){
-              if(오브젝트.hasOwnProperty(key)){
-                console.log(오브젝트[key]);
-              }
-            }
+            어레이[Symbol.iterator]();<br>
+            // 배열로 호출하면 ArrayIterator{}를 가지고 있음<br><br>
+            'ㅇㅁㄴㅇ'[Symbol.iterator]();<br>
+            // 문자열로 호출하면 StringIterator{}를 가지고 있는 것을 확인할 수 있는데<br>
+            // 이런 요소들을 iterable한 자료형이라고 한다.
+          </div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>NodeList에서 사용가능</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>DOM에서 Node를 불러올 떄 [] 대괄호 안에 담겨오는데 이런 데이터를 Array가 아닌 NodeList 자료형이라고 부른다.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>NodeList에 있는 HTML요소들을 하나씩 꺼내서 처리할 때 매우 자주 쓸수 있는 반복문이지만 for of의 호환성에 주의해야 한다.</p>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제1</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>for of 반복문을 이용해서 2단부터 9단까지의 구구단을 콘솔창에 출력하기</p>
+          <div class="code_box">
+            let numArr = [1,2,3,4,5,6,7,8,9];<br>
+            for (let i of numArr) {<br>
+            &nbsp;&nbsp;for (let j of numArr) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log(`${i} x ${j} = ${i * j}`);<br>
+            &nbsp;&nbsp;}<br>
+            } 
           </div>
         </li>
         <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span>for of 반복문</p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Array, 문자, arguments, NodeList, Map, Set에 사용 가능</p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span>이터러블한 요소에만 사용가능</p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
+          <p class="text_desc"><span class="ic_bullet type01"></span>연습문제2</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>object자료의 key값에 오타를 제거하기</p>
           <div class="code_box">
-            var 어레이 = [2,3,4,5];
-            for(var 자료 of 어레이){
-              console.log(자료);
-            }
-            for(var 자료 of 'ㄴㄻㄴㅇㅁㄴㅇ'){
-              console.log(자료); //ㄴㄹㅁㄴㅇㅁㄴㅇ
+            var products= [
+            &nbsp;&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;name1 : 'chair',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;price1 : 7000<br>
+            &nbsp;&nbsp;},<br>
+            &nbsp;&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;name2 : 'sofa',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;price : 7000<br>
+            &nbsp;&nbsp;},<br>
+            &nbsp;&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;name1 : 'desk',<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;price3 : 9000<br>
+            &nbsp;&nbsp;},<br>
+            ];
+          </div>
+          <div class="code_box">
+            let newValue;<br>
+            let newKey;<br><br>
+            for (let item of products) {<br>
+            &nbsp;&nbsp;for (let key in item) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;//마지막글자를 숫자로변환했을 때 NaN이 안나오면 (숫자면)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;if (isNaN(parseInt(key.slice(-1))) == false) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newValue = item[key];<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newKey = key.slice(0, -1);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;item[newKey] = newValue;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete item[key];<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;}<br>
             }
           </div>
         </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span>어레이[Symbol.iterator]();</p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span>StringIterator{} 라는 것을 가지고 있는 </p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-        <li class="list_items">
-          <p class="text_desc"><span class="ic_bullet type01"></span></p>
-          <p class="sub_desc type02"><span class="ic_bullet type02"></span></p>
-          <p class="sub_desc type03"><span class="ic_bullet type03"></span></p>
-          <div class="code_box"></div>
-        </li>
-
       </ul>
     </div>
   </div>
