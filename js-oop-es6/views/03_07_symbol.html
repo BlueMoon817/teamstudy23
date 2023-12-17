@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symbol</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">7. Symbol</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Symbol 자료형</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>심볼 생성</p>
+          <div class="code_box">
+            var 심볼 = Symbol('설명');
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Symbol의 활용</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Object 자료형의 비밀스런 key값</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>객체에 비밀스러운 값을 저장하고 싶을 때</p>
+          <div class="code_box">
+            var 심볼 = Symbol('설명');<br>
+            var weight = Symbol('내 시크릿 몸무게');<br>
+            var weight = Symbol('내 키');<br>
+            var person = {<br>
+            &nbsp;&nbsp;name: 'yura',<br>
+            &nbsp;&nbsp;//Symbol을 직접넣기<br>
+            &nbsp;&nbsp;[age] : 100<br>
+            };<br>
+            // person에 weight라는 심볼의 값을 저장하기<br>
+            person[weight] = 100;<br>
+            person[height] = 160;<br>
+            console.log(person); // {name:"yura", Symbol(내 시크릿 몸무게): 100}<br>
+            //콘솔에서 찍는건 가능하지만 반복문에서만 나오지 않음<br>
+            for(var key in person){<br>
+            &nbsp;&nbsp;console.log(person[key]); // yura -> symbol은 나오지 않음. <br>
+            &nbsp;&nbsp;// for문에서 person[weight]가 출력되지 않는 이유는  enumerable하지 않기 때문<br>
+            }
+          </div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>import 해온 파일 또는 라이브러리 사용시 가져온 object에 자료를 추가 또는 수정하되 기존코드에 변화를 주기 싫다면</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>반복문에 뜨지 않기 때문에 기존 코드에 영향을 주지 않음..?</p>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Symbol의 특징</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>설명이 같다고 같은 symbol이 아님</p>
+          <div class="code_box">
+            var a = Symbol('설명1');<br>
+            var b = Symbol('설명1');<br>
+            // a와 b는 같지 않다.
+          </div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>전역 심볼을 만들고 싶을 때</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>Symbol.for()</p>
+          <div class="code_box">
+            var a = Symbol.for('설명1');<br>
+            var b = Symbol.for('설명1');<br>
+            // Symbol.for()를 사용하여 설명을 작성하면 변수생성시 설명이 동일한 경우 기존 심볼을 복사해준다. <br>
+            // 즉 위의 b 변수의 선언은 var b=a와 같다.<br>
+            // 따라서 a == b 는 true이다.
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>기본 내장 Symbol들</p>
+          <div class="code_box">
+            var 어레이 = [2,3,4];<br>
+            //배열을 생성할 때 기본으로 들어가는 Symbol<br>
+            어레이[Symbol.iterator];<br>
+            // 어레이를 반복문에 돌릴시 어레이[Symbol.iterator]는 출력이 되지 않는다.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

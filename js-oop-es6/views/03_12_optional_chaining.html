@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>?. / ?? 연산자 (optional chaining)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">11. ?. / ?? 연산자 (optional chaining)</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>여러 문자, 숫자를 한 변수에 저장하려면</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>?.연산자</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>중접된 object 자료에서 자료를 참조할 때 reference 에러 없이 안전하게 값을 가져올 수 있음.</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>에러를 해결해주는 문법이 아니라 에러를 감춰주는 문법임을 유의하여 사용</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>왼쪽의 변수가 undefined 또는 null이면 undefined를 반환</p>
+          <div class="code_box">
+            var user = {
+            &nbsp;&nbsp;name: 'Mun', <br>
+            &nbsp;&nbsp;age: {value : 20},<br>
+            }<br><br>
+            
+            console.log(user.age.value); //20<br><br>
+            
+            // 없는 데이터를 호출(1depth) -> undefined<br>
+            console.log(user.country); // undefined<br>
+            
+            // 없는 데이터를 호출(2depth) -> undefined.value를 호출한 것<br>
+            console.log(user.country.value);// undefined의 어트리뷰트는 존재하지 않으므로 참조에러가 뜬다.<br><br>
+            
+            // ?. 연산자로 없는데이터를 호출하면<br>
+            console.log(user.country);// undefined<br>
+            console.log(user.country?.value);// undefined<br><br>
+            
+            // null값도 동일하게 작동
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>?? 연산자 (nullish coalescing 연산자)</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>좌항이 undefined, null이면 우항의 값을 출력한다.</p>
+          <div class="code_box">
+            var user;<br>
+            console.log(user ?? '로딩중');
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

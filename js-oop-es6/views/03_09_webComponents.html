@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Components</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">9. Web Components 문법</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Web Components : 커스텀 HTML 태그 만들기</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Web Components는 자바스크립트 문법이 아닌 js문법으로 구현할 수 있는 브라우저 기본 기능이다.</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>커스텀태그로 길고 복잡한 HTML 축약하는 법</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>customElements.define('태그이름작명', class명);</p>
+          <div class="code_box">
+            &lt;custom-input&gt;&lt;/custom-input&gt;<br><br>
+            
+            class 클래스 extends HTMLElement{<br>
+            &nbsp;&nbsp;connectedCallback(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// custom-input 태그에 기본 넣을 html (component)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 컴포넌트 내용 만들기 1번 방식<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;let 변수 = document.createElement('label');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.appendChild(변수);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// 컴포넌트 내용 만들기 2번 방식<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.innerHTML = `&lt;label&gt;이메일 인풋이에요&lt;/label&gt;&lt;input&gt;`;<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            customElements.define('custom-input', 클래스);
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>커스텀 태그의 장점</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>html 중복 제거, 다른 페이지에서 재활용 가능</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>커스텀태그 안에서도 파라미터문법 구현가능</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>attribute 변경감지 기능 제공됨</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>React, Vue 특징: props(attribute) 변경되면 html 자동 재렌더링됨</p>
+          <div class="code_box">
+            &lt;custom-input name="비밀번호"&gt;&lt;/custom-input&gt;<br><br>
+            
+            class 클래스 extends HTMLElement{<br>
+            &nbsp;&nbsp;connectedCallback(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;let name= this.getAttribute('name');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;// custom-input 태그에 기본 넣을 html (component)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.innerHTML = `&lt;label&gt;${name} 인풋이에요&lt;/label&gt;&lt;input type="password"&gt;`;<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;static get observedAttribute(){  // name이라는 attribute가 바뀌는지 감시<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;return ['name']<br>
+            &nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;attributeChangedCallback(){ //attribute가 바뀌면 실행<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.innerHTML = `&lt;label&gt;${name} 인풋이에요&lt;/label&gt;&lt;input type="password"&gt;`;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.log(this.getAttribute('name'));<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            customElements.define('custom-input', 클래스);
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

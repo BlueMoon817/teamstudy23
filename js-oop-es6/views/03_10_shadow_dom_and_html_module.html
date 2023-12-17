@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>shadow DOM과 template으로 HTML 모듈화하기</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">    
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/note.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <h1 class="note_title">10. shadow DOM과 template으로 HTML 모듈화하기</h1>
+    <div class="note_box">
+      <ul class="note_list">
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>shadow DOM과 template으로 HTML 모듈화하기</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>shadow DOM 만드는 법</p>
+          <div class="code_box">
+            &lt;div id="mordor"&gt;&lt;/div&gt;<br><br>
+            
+            document.querySelector('#mordor').attachShadow({mode: 'open'});<br>
+            document.querySelector('#mordor').shadowRoot.innerHTML = '&lt;p&gt;라라라&lt;/p&gt;'
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Web Components + shadow DOM = 완벽한 HTML모듈 : Web Component에 스타일도 넣고 싶다면?</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>shadow DOM 미적용</p>
+          <div class="code_box">
+            &lt;custom-input&gt;&lt;/custom-input&gt;<br><br>
+            
+            class 클래스 extends HTMLElement{<br>
+            &nbsp;&nbsp;connectedCallback(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.innerHTML = `&lt;label&gt;이메일 인풋이에요&lt;/label&gt;&lt;input&gt;`;<br>
+            // 스타일을 이렇게 넣으면 모든 label에 적용되어버린다.(기존의코드 스타일이 변경되므로 권장하지 않음)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;style&gt;label {color:red}&lt;/style&gt;<br>
+            // 타일을 shadow DOM에 넣어서 작성하면 custom-input의 label에만 적용된다.<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            customElements.define('custom-input', 클래스);            
+          </div>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>shadow DOM 적용</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>전역에서 일괄적용하는 우선순위가 더 높은 상속되는 스타일이 있다면 당연히 shadow DOM안의 스타일이 무시될 수 있다.</p>          
+          <div class="code_box">
+            &lt;custom-input&gt;&lt;/custom-input&gt;<br><br>
+            
+            class 클래스 extends HTMLElement{<br>
+            &nbsp;&nbsp;connectedCallback(){<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;// shadow DOM에 넣어서 작성하면 스타일이 전역의 label이 아닌 custom-input의 label에만 적용된다.<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;this.attachShadow({mode: 'open'});<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.shadowRoot.innerHTML = `&lt;label&gt;이메일 인풋이에요&lt;/label&gt;&lt;input&gt;`;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;style&gt;label {color:red}&lt;/style&gt;<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            customElements.define('custom-input', 클래스);
+          </div>          
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>코드를 좀 더 깔끔하게 작성하기 : template 태그</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>template의 특징</p>
+          <p class="sub_desc type03"><span class="ic_bullet type03"></span>HTML를 임시로 보관한다.(렌더링되지 않음)</p>
+          <div class="code_box">
+            &lt;custom-input&gt;&lt;/custom-input&gt;<br><br>
+            &lt;template id="template1"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;label&gt;이메일 인풋이에요&lt;/label&gt;&lt;input&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;style&gt;label {color:red}&lt;/style&gt;<br>
+            &lt;/template&gt;<br><br>
+            
+            class 클래스 extends HTMLElement {<br>
+            &nbsp;&nbsp;connectedCallback(){<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;// shadow DOM에 넣어서 작성하면 스타일이 전역의 label이 아닌 custom-input의 label에만 적용된다.<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;this.attachShadow({mode: 'open'});<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.shadowRoot.append(template1.content.cloneNode(true));<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            customElements.define('custom-input', 클래스);              
+          </div>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>Web Component 생성을 도와주는 라이브러리</p>
+          <p class="sub_desc type02"><span class="ic_bullet type02"></span>Lit , Stencil(props,state도 지원)</p>
+        </li>
+        <li class="list_items">
+          <p class="text_desc"><span class="ic_bullet type01"></span>shadow DOM에 이벤트리스너 사용하기</p>
+          <div class="code_box">
+            &lt;custom-input&gt;&lt;/custom-input&gt;<br><br>
+            &lt;template id="template1"&gt;<br>
+            &lt;label&gt;이메일 인풋이에요&lt;/label&gt;&lt;input&gt;<br>
+            &lt;style&gt;label {color:red}&lt;/style&gt;<br>
+            &lt;/template&gt;<br><br>
+            
+            class 클래스 extends HTMLElement {<br>
+            &nbsp;&nbsp;connectedCallback(){<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;// shadow DOM에 넣어서 작성하면 스타일이 전역의 label이 아닌 custom-input의 label에만 적용된다.<br>
+            &nbsp;&nbsp; &nbsp;&nbsp;this.attachShadow({mode: 'open'});<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;this.shadowRoot.append(template1.content.cloneNode(true));<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;let el = this.shadowRoot.querySelector('label');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;el.addEventListener('click',function(){<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log('클릭함');<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+            &nbsp;&nbsp;}<br>
+            }<br>
+            customElements.define('custom-input', 클래스);              
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>
