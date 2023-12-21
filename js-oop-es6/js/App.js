@@ -1,6 +1,6 @@
 import Background from "./components/Background.js";
 import Player from "./components/player.js";
-import Cactus from "./components/Cactus";
+import Obstacle from "./components/Obstacle.js";
 import Bird from "./components/Bird.js";
 import Score from "./components/Score.js";
 import GameHandler from "./components/GameHandler.js";
