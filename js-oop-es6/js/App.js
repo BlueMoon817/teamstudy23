@@ -18,11 +18,13 @@ export default class App {
   constructor(){
 
   }
+  
   init(){
     App.canvas.width = App.width * App.dpr;
     App.canvas.height = App.height * App.dpr;
     App.context.scale(App.dpr, App.dpr);
   }
+
   render(){
     let now, delta;
     let then = Date.now();
